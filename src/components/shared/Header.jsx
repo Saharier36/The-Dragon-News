@@ -10,8 +10,8 @@ const Header = () => {
         className="mx-auto"
         src={logo}
         alt="Logo"
-        width={300}
-        height={200}
+        width="full"
+        height="full"
       />
       <p className="text-[#403F3F]">Journalism Without Fear or Favour</p>
       <p className="text-[#403F3F] font-medium">

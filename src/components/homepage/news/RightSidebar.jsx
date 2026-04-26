@@ -50,7 +50,7 @@ const RightSidebar = () => {
         <ul className="border border-gray-200 rounded-xl divide-y divide-gray-200">
           {socials.map(({ icon, label }) => (
             <li key={label} className="flex items-center gap-3 px-4 py-3">
-              <span className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100">
+              <span className="w-9 h-9 flex items-center justify-center rounded-full bg-[#F3F3F3]">
                 {icon}
               </span>
               <span className="text-gray-600 font-medium">{label}</span>

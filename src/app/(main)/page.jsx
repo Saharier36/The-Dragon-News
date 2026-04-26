@@ -14,15 +14,15 @@ export default async function Home() {
 
   return (
     <div className="container mx-auto grid grid-cols-1 md:grid-cols-12 gap-4 my-12 px-4">
-      <div className="col-span-1 md:col-span-3 lg:col-span-2">
+      <div className="col-span-1 md:col-span-3">
         <LeftSidebar categories={categories} activeId={null} />
       </div>
 
-      <div className="col-span-1 md:col-span-6 lg:col-span-8 font-bold text-2xl bg-red-300">
+      <div className="col-span-1 md:col-span-6 font-bold text-2xl bg-red-300">
         All news
       </div>
 
-      <div className="col-span-1 md:col-span-3 lg:col-span-2">
+      <div className="col-span-1 md:col-span-3 ">
         <RightSidebar />
       </div>
     </div>

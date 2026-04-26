@@ -5,7 +5,7 @@ import { format } from "date-fns";
 
 const Header = () => {
   return (
-    <div className="text-center py-8 space-y-2">
+    <div className="text-center py-8 px-4 space-y-2">
       <Image
         className="mx-auto"
         src={logo}

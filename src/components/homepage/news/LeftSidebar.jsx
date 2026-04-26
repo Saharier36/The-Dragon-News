@@ -26,4 +26,3 @@ const LeftSidebar = ({ categories, activeId}) => {
 
 export default LeftSidebar;
 
-// btn btn-ghost text-[#9F9F9F] hover:text-[#403F3F] hover:bg-[#E7E7E7]  justify-start

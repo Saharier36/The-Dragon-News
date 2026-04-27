@@ -53,7 +53,7 @@ const NewsCard = ({ news }) => {
         <p className="text-gray-500 text-sm line-clamp-3">{details}</p>
 
         <Link
-          href={`/news/${news.id}`}
+          href={`/news/${news._id}`}
           className="text-[#F75B5F] text-sm font-semibold mt-2 cursor-pointer hover:underline inline-block"
         >
           Read More

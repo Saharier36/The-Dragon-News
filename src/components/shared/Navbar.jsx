@@ -3,6 +3,7 @@ import React from "react";
 import userAvatar from "@/assets/user.png";
 import Link from "next/link";
 import NavLink from "./NavLink";
+import { FaSignInAlt } from "react-icons/fa";
 
 const Navbar = () => {
   const menuItems = (
@@ -63,7 +64,10 @@ const Navbar = () => {
           href="/login"
           className="btn bg-[#403F3F] text-white hover:bg-[#353333] rounded-none"
         >
-          Login
+          <span className="hidden md:block">Login</span>
+          <span className="block md:hidden">
+            <FaSignInAlt size={17} />
+          </span>
         </Link>
       </div>
     </div>

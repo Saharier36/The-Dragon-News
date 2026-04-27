@@ -1,4 +1,6 @@
+import EmptyNews from '@/components/homepage/news/EmptyNews';
 import LeftSidebar from '@/components/homepage/news/LeftSidebar';
+import NewsCard from '@/components/homepage/news/NewsCard';
 import RightSidebar from '@/components/homepage/news/RightSidebar';
 import { getCategories, getNewsByCategoryId } from '@/service/data';
 import React from 'react';
@@ -20,11 +22,9 @@ const NewsCategoryPage = async ({params}) => {
         <div className="col-span-1 md:col-span-6">
           <h3 className="text-xl font-semibold mb-4">Dragon News Home</h3>
           {news.length > 0 ? (
-            news.map((n) => {
-              return <div key={n._id}>{n.title}</div>;
-            })
+            news.map((n) => <NewsCard key={n._id} news={n}></NewsCard>)
           ) : (
-            <p>No news found for this category.</p>
+            <EmptyNews/>
           )}
         </div>
 

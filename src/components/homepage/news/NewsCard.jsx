@@ -52,7 +52,10 @@ const NewsCard = ({ news }) => {
       <div className="px-5 py-4">
         <p className="text-gray-500 text-sm line-clamp-3">{details}</p>
 
-        <Link href={`/news/${news.id}`} className="text-[#F75B5F] text-sm font-semibold mt-2 cursor-pointer hover:underline inline-block">
+        <Link
+          href={`/news/${news.id}`}
+          className="text-[#F75B5F] text-sm font-semibold mt-2 cursor-pointer hover:underline inline-block"
+        >
           Read More
         </Link>
       </div>

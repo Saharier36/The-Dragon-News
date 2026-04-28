@@ -100,7 +100,8 @@ const RegisterPage = () => {
                   {...register("terms", { required: "You must accept terms" })}
                 />
                 <span className="label-text">Accept Term & Conditions</span>
-              </label><br />
+              </label>
+              <br />
               {errors.terms && (
                 <span className="text-error text-xs">
                   {errors.terms.message}

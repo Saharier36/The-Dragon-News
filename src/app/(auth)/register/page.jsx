@@ -3,6 +3,7 @@ import { authClient } from "@/lib/auth-client";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { ToastContainer } from "react-toastify";
 
 const RegisterPage = () => {
   const {
@@ -23,15 +24,16 @@ const RegisterPage = () => {
     });
     console.log(res, error);
     if (error) {
-      alert(error.message);
+      toast.error(error.message);
     }
     if (res) {
-      alert("Registration successful!");
+      toast.success("Registration successful!");
     }
   };
 
   return (
     <div className="min-h-screen bg-base-200 flex items-center justify-center">
+      <ToastContainer position="top-center" autoClose={3000} theme="colored" />
       <div className="card bg-base-100 shadow rounded w-105">
         <div className="card-body px-12 py-10">
           <h2 className="text-center text-2xl font-bold text-[#403F3F] mb-1">

@@ -3,6 +3,7 @@ import { authClient } from "@/lib/auth-client";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { toast, ToastContainer } from "react-toastify";
 
 const LoginPage = () => {
   const {
@@ -21,14 +22,15 @@ const LoginPage = () => {
       callbackURL: "/",
     });
     if (error) {
-      alert(error.message);
+      toast.error(error.message);
     } else {
-      alert("Login successful!");
+      toast.success("Login successful!");
     }
   };
 
   return (
     <div className="min-h-screen bg-base-200 flex items-center justify-center">
+      <ToastContainer position="top-center" autoClose={3000} theme="colored" />
       <div className="card bg-base-100 shadow rounded w-105">
         <div className="card-body px-12 py-10">
           <h2 className="text-center text-2xl font-bold text-[#403F3F] mb-1">
@@ -79,7 +81,11 @@ const LoginPage = () => {
                     isShowPassword ? "Hide password" : "Show password"
                   }
                 >
-                  {isShowPassword ? <FaEyeSlash size={17} /> : <FaEye size={17}/>}
+                  {isShowPassword ? (
+                    <FaEyeSlash size={17} />
+                  ) : (
+                    <FaEye size={17} />
+                  )}
                 </button>
               </div>
 

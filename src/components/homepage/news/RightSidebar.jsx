@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import React from "react";
 import {
@@ -13,6 +14,7 @@ import classroom from "@/assets/class.png";
 import playground from "@/assets/playground.png";
 import background from "@/assets/bg.png";
 import Link from "next/link";
+import { authClient } from "@/lib/auth-client";
 
 const socials = [
   { icon: <FaFacebook className="text-blue-600 text-xl" />, label: "Facebook" },
@@ -29,19 +31,30 @@ const qZones = [
   { img: playground, label: "Play Ground" },
 ];
 
+const google = async () => {
+  const data = await authClient.signIn.social({
+    provider: "google",
+  });
+};
+const github = async () => {
+  const data = await authClient.signIn.social({
+    provider: "github",
+  });
+};
+
 const RightSidebar = () => {
   return (
     <div>
       {/* LogeIn With */}
       <div>
         <h3 className="text-xl font-semibold mb-4">Login With</h3>
-        <button className="w-full mb-2 py-2 px-4 border border-blue-500 text-blue-500 rounded-md flex items-center justify-center gap-2 hover:bg-gray-100 cursor-pointer">
+        <button onClick={google} className="w-full mb-2 py-2 px-4 border border-blue-500 text-blue-500 rounded-md flex items-center justify-center gap-2 hover:bg-gray-100 cursor-pointer">
           <i className="fab fa-google text-red-500"></i>
           <FaGoogle />
           Login with Google
         </button>
 
-        <button className="w-full mb-2 py-2 px-4 border border-gray-500 rounded-md flex items-center justify-center gap-2 hover:bg-gray-100 cursor-pointer">
+        <button onClick={github} className="w-full mb-2 py-2 px-4 border border-gray-500 rounded-md flex items-center justify-center gap-2 hover:bg-gray-100 cursor-pointer">
           <i className="fab fa-github text-gray-800"></i>
           <FaGithub />
           Login with GitHub

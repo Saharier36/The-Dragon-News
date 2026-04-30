@@ -1,7 +1,8 @@
 "use client";
 import { authClient } from "@/lib/auth-client";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const LoginPage = () => {
   const {
@@ -10,14 +11,20 @@ const LoginPage = () => {
     formState: { errors },
   } = useForm();
 
-  const handleLoginFunc = async(data) => {
+  const [isShowPassword, setIsShowPassword] = useState(false);
+
+  const handleLoginFunc = async (data) => {
     const { data: res, error } = await authClient.signIn.email({
-    email: data.email, // required
-    password: data.password, // required
-    rememberMe: true,
-    callbackURL: "/",
-});
-    console.log(res, error);
+      email: data.email, // required
+      password: data.password, // required
+      rememberMe: true,
+      callbackURL: "/",
+    });
+    if (error) {
+      alert(error.message);
+    } else {
+      alert("Login successful!");
+    }
   };
 
   return (
@@ -32,7 +39,9 @@ const LoginPage = () => {
           <form onSubmit={handleSubmit(handleLoginFunc)}>
             <div className="form-control mb-3">
               <label className="label pb-1">
-                <span className="label-text font-semibold">Email address<span className="text-error">*</span></span>
+                <span className="label-text font-semibold">
+                  Email address<span className="text-error">*</span>
+                </span>
               </label>
               <input
                 type="email"
@@ -40,21 +49,44 @@ const LoginPage = () => {
                 className="input input-bordered input-sm h-10 bg-base-200 focus:outline-none"
                 {...register("email", { required: "Email is required" })}
               />
-              {errors.email && <span className="text-error text-xs">{errors.email.message}</span>}
+              {errors.email && (
+                <span className="text-error text-xs">
+                  {errors.email.message}
+                </span>
+              )}
             </div>
 
             <div className="form-control mb-5">
               <label className="label pb-1">
-                <span className="label-text font-semibold">Password<span className="text-error">*</span></span>
+                <span className="label-text font-semibold">
+                  Password<span className="text-error">*</span>
+                </span>
               </label>
-              <input
-                type="password"
-                placeholder="Enter your password"
-                className="input input-bordered input-sm h-10 bg-base-200 focus:outline-none"
-                {...register("password", { required: "Password is required" })}
-              />
+              <div className="relative">
+                <input
+                  type={isShowPassword ? "text" : "password"}
+                  placeholder="Enter your password"
+                  className="input input-bordered input-sm h-10 bg-base-200 focus:outline-none pr-10"
+                  {...register("password", {
+                    required: "Password is required",
+                  })}
+                />
+                <button
+                  type="button"
+                  className="absolute inset-y-0 right-0 flex items-center pr-3 text-base-content/70 hover:text-base-content"
+                  onClick={() => setIsShowPassword(!isShowPassword)}
+                  aria-label={
+                    isShowPassword ? "Hide password" : "Show password"
+                  }
+                >
+                  {isShowPassword ? <FaEyeSlash size={17} /> : <FaEye size={17}/>}
+                </button>
+              </div>
+
               {errors.password && (
-                <span className="text-error text-xs">{errors.password.message}</span>
+                <span className="text-error text-xs">
+                  {errors.password.message}
+                </span>
               )}
             </div>
 

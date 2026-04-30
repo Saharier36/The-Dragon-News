@@ -1,11 +1,16 @@
+"use client";
 import Image from "next/image";
 import React from "react";
 import userAvatar from "@/assets/user.png";
 import Link from "next/link";
 import NavLink from "./NavLink";
-import { FaSignInAlt } from "react-icons/fa";
+import { FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
+import { authClient } from "@/lib/auth-client";
 
 const Navbar = () => {
+  const { data: session, isPending } = authClient.useSession();
+  const user = session?.user;
+
   const menuItems = (
     <>
       <li>
@@ -19,6 +24,7 @@ const Navbar = () => {
       </li>
     </>
   );
+
   return (
     <div className="navbar bg-base-100 container mx-auto">
       <div className="navbar-start">
@@ -57,18 +63,45 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end gap-4">
-        <div className="w-10 rounded-full">
-          <Image width={40} height={40} alt="User Avatar" src={userAvatar} />
-        </div>
-        <Link
-          href="/login"
-          className="btn bg-[#403F3F] text-white hover:bg-[#353333] rounded-none"
-        >
-          <span className="hidden md:block">Login</span>
-          <span className="block md:hidden">
-            <FaSignInAlt size={17} />
-          </span>
-        </Link>
+        {isPending ? (
+          <div className="loading loading-spinner"></div>
+        ) : user ? (
+          <>
+            <h2 className="text-lg font-semibold hidden md:block">
+              Welcome {user.name}
+            </h2>
+
+            <div className="w-10 rounded-full">
+              <Image
+                width={40}
+                height={40}
+                alt="User Avatar"
+                src={user.image || userAvatar}
+              />
+            </div>
+
+            <Link
+              onClick={async () => await authClient.signOut()}
+              href="/"
+              className="btn bg-[#403F3F] text-white hover:bg-[#353333] rounded-none"
+            >
+              <span className="hidden md:block">Logout</span>
+              <span className="block md:hidden">
+                <FaSignOutAlt size={17} />
+              </span>
+            </Link>
+          </>
+        ) : (
+          <Link
+            href="/login"
+            className="btn bg-[#403F3F] text-white hover:bg-[#353333] rounded-none"
+          >
+            <span className="hidden md:block">Login</span>
+            <span className="block md:hidden">
+              <FaSignInAlt size={17} />
+            </span>
+          </Link>
+        )}
       </div>
     </div>
   );

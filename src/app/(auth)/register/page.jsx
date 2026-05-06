@@ -69,7 +69,7 @@ const RegisterPage = () => {
                 type="text"
                 placeholder="Enter your photo URL"
                 className="input input-bordered input-sm h-10 bg-base-200 focus:outline-none"
-                {...register("photoUrl")}
+                {...register("image")}
               />
             </div>
 
